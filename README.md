@@ -1,4 +1,6 @@
 # DeusExGalaxy
+## Organisation du projet
+
 
 
 # Utiliser Git Bash
