@@ -1,3 +1,5 @@
+# coding: utf-8
+
 import maya.cmds as cmds
 
 class UI:
@@ -16,6 +18,7 @@ class UI:
         cmds.button(label="Générer la galaxie", command=self.generation, align="center")
         # On crée un bouton qui appelle la fonction "self.generation"
 
+        print("Windows")
         cmds.showWindow()
 
     def generation(self, *args):
@@ -23,6 +26,6 @@ class UI:
         Fonction qui s'occupe de la génération du côté de l'interface graphique.
         On va pouvoir afficher des informations dans la fenêtre ou la console, et appeler une/des fonction.s qui lanceront les modélisations procédurales.
         """
-        cmds.file(f=True, new=True) # On commentera cette ligne si on veut pouvoir avoir plusieurs galaxies dans la même scène.
+        cmds.file(f=True, new=True) # On enlèvera cette ligne si on veut pouvoir avoir plusieurs galaxies dans la même scène.
 
         print("On appellera ici une fonction pour lancer la modélisation")
