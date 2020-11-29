@@ -14,6 +14,8 @@ class UI:
         self.nbPlaneteSlider = []
         #self.U = Univers()
 
+        self.U = Univers()
+
         if cmds.window('window1', ex=True):
             # On vérifie si une fenêtre n'est pas déj�  ouverte. Si oui, on la ferme
             cmds.deleteUI('window1', window=True)
