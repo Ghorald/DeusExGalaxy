@@ -1,4 +1,5 @@
 # Changer par le chemin vers votre dossier ici
-from DeusExGalaxy.UI import UI
+from DeusExGalaxy import UI
 
-window = UI()
+reload(UI)
+window = UI.UI()

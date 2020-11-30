@@ -1,7 +1,9 @@
 # coding: utf-8
 
 import maya.cmds as cmds
-from DeusExGalaxy.Univers import Univers
+from DeusExGalaxy import Univers
+
+reload(Univers)
 
 class UI:
     def __init__(self):
@@ -9,7 +11,7 @@ class UI:
         Fonction d'initialisation de la classe UI.
         Crée la fenêtre
         """
-        self.U = Univers()
+        self.U = Univers.Univers()
 
         if cmds.window('window1', ex=True):
             # On vérifie si une fenêtre n'est pas déjà  ouverte. Si oui, on la ferme
@@ -20,7 +22,7 @@ class UI:
         """
         Affichage de la fenêtre
         """
-        cmds.window(title="Generateur d'Univers - pouetpouet")
+        cmds.window(title="Darmanin Caca Boudin")
         cmds.columnLayout(adjustableColumn=True)
 
         self.nbSystemeSlider = cmds.intSliderGrp(field=True, label='Nombre de Systemes planetaires', minValue=1, maxValue=10, value=5)
