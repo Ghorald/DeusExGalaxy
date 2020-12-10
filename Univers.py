@@ -8,13 +8,13 @@ class Univers:
 		self.nbPlanete = []
 
 	#Generateur d'Univers
-	def creerUnivers():
+	def creerUnivers(self):
 
-	    for i in range(cmds.intSliderGrp(nbSysteme, q=True, value=True)):
-	        creerSysteme(rd.randint(-500, 500), rd.randint(-500, 500), rd.randint(-500, 500), nbPlanete[i])
+	    for i in range(cmds.intSliderGrp(self.nbSysteme, q=True, value=True)):
+	        creerSysteme(rd.randint(-500, 500), rd.randint(-500, 500), rd.randint(-500, 500), self.nbPlanete[i])
 
 	#Génération Système Planétaire
-	def creerSysteme(xr, yr, zr, nbPlanete):
+	def creerSysteme(self, xr, yr, zr, nbPlanete):
 
 	    cmds.polySphere(r = 4, n = "Soleil")
 	    cmds.move(xr, yr, zr)
