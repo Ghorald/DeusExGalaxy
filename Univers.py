@@ -9,6 +9,12 @@ class Univers:
 
 	def addPlaneteSlider(self, slider):
 		self.nbPlanetesSlider.append(slider)
+	
+	def getPlaneteSlider(self):
+		return self.nbPlanetesSlider
+	
+	def resPlaneteSlider(self):
+		self.nbPlanetesSlider = []
 
 	# Générateur d'Univers
 	def creerUnivers(self, sysSlider):

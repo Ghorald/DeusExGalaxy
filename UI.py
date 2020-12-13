@@ -37,13 +37,21 @@ class UI:
         """
         Rechargement de la fenêtre avec le bon nombre de sliders
         """
+        planSlider = self.U.getPlaneteSlider()
+        if planSlider != []:
+            for i in planSlider:
+                cmds.deleteUI(i, control=True)
+            self.U.resPlaneteSlider()
+            cmds.deleteUI('createUni', control=True)
+            cmds.deleteUI('createStars', control=True)
+
         nbSys = cmds.intSliderGrp(self.nbSystemeSlider, q=True, value=True)
 
         for i in range(nbSys):
             self.U.addPlaneteSlider(cmds.intSliderGrp(field=True, label='Nombre de planetes', minValue=1, maxValue=10, value=5))
 
-        cmds.button(label="Generer un Univers", c=self.creerUnivers)
-        cmds.button(label="Generer les etoiles", c=self.creerEtoiles)
+        cmds.button('createUni', label="Generer un Univers", c=self.creerUnivers)
+        cmds.button('createStars', label="Generer les etoiles", c=self.creerEtoiles)
 
 
     def creerUnivers(self, *args):
