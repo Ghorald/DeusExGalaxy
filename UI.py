@@ -22,12 +22,12 @@ class UI:
         """
         Affichage de la fenêtre
         """
-        cmds.window(title="Generateur d'univers")
-        cmds.columnLayout(adjustableColumn=True)
-
-        self.nbSystemeSlider = cmds.intSliderGrp(field=True, label='Nombre de Systemes planetaires', minValue=1, maxValue=10, value=5)
+        window = cmds.window(title="Generateur d'univers")
+        cmds.tabLayout()
+        cmds.columnLayout("Tanina", adjustableColumn=True)
+        self.nbSystemeSlider = cmds.intSliderGrp(field=True, label='Nombre de systemes planetaires', minValue=1, maxValue=10, value=5)
         self.nbEtoilesSlider = cmds.intSliderGrp(field=True, label='Nombre d\'etoiles', minValue=100, maxValue=1000, value=500)
-        cmds.button(label = "OK", c = self.rechargerFenetre)
+        cmds.button(label="OK", c=self.rechargerFenetre)
 
         #Lancer la fenetre
         cmds.showWindow()
@@ -43,7 +43,7 @@ class UI:
             self.U.addPlaneteSlider(cmds.intSliderGrp(field=True, label='Nombre de planetes', minValue=1, maxValue=10, value=5))
 
         cmds.button(label="Generer un Univers", c=self.creerUnivers)
-        cmds.button(label="Generer les étoiles", c=self.creerEtoiles)
+        cmds.button(label="Generer les etoiles", c=self.creerEtoiles)
 
 
     def creerUnivers(self, *args):
