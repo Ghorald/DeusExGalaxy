@@ -22,10 +22,11 @@ class UI:
         """
         Affichage de la fenêtre
         """
-        cmds.window(title="Darmanin Caca Boudin")
+        cmds.window(title="Generateur d'univers")
         cmds.columnLayout(adjustableColumn=True)
 
         self.nbSystemeSlider = cmds.intSliderGrp(field=True, label='Nombre de Systemes planetaires', minValue=1, maxValue=10, value=5)
+        self.nbEtoilesSlider = cmds.intSliderGrp(field=True, label='Nombre d\'etoiles', minValue=100, maxValue=1000, value=500)
         cmds.button(label = "OK", c = self.rechargerFenetre)
 
         #Lancer la fenetre
@@ -42,7 +43,12 @@ class UI:
             self.U.addPlaneteSlider(cmds.intSliderGrp(field=True, label='Nombre de planetes', minValue=1, maxValue=10, value=5))
 
         cmds.button(label="Generer un Univers", c=self.creerUnivers)
+        cmds.button(label="Generer les étoiles", c=self.creerEtoiles)
 
 
     def creerUnivers(self, *args):
         self.U.creerUnivers(self.nbSystemeSlider)
+
+    def creerEtoiles(self, *args):
+        print(cmds.intSliderGrp(self.nbEtoilesSlider, q=True, value=True))
+        self.U.creerEtoiles(self.nbEtoilesSlider)
