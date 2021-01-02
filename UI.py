@@ -50,7 +50,7 @@ class UI:
         for i in range(nbSys):
             self.U.addPlaneteSlider(cmds.intSliderGrp(field=True, label='Nombre de planetes', minValue=1, maxValue=10, value=5))
 
-        cmds.button('createUni', label="Generer un Univers", c=self.creerUnivers)
+        cmds.button('createUni', label="Generer un univers", c=self.creerUnivers)
         cmds.button('createStars', label="Generer les etoiles", c=self.creerEtoiles)
 
 
