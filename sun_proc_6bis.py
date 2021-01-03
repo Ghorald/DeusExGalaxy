@@ -18,7 +18,7 @@ def sunF():
 	VformeTexture = 2.0
 
 	#Filtre pour séléctionner que les png
-	basicFilter = "*.png"
+	basicFilter = "*.jpg"
 	#on ouvre une image ( car le filemode est à 1 ) , on utilise le filtre basicfilter
 	img = cmds.fileDialog2(fileMode = 1 , fileFilter=basicFilter, dialogStyle=2)
 	img2 = cmds.fileDialog2(fileMode = 1 , fileFilter=basicFilter, dialogStyle=2)

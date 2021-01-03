@@ -10,7 +10,6 @@ def planeteF():
 	Vradius = 1
 	#Vcouleur1
 	#Vcouleur2
-	#VcouleurN
 	VformeCouleur = 4
 	VtypeCouleur = 4
 	VtypeBlend = 3
@@ -19,20 +18,20 @@ def planeteF():
 	Vqtite2 = 0.5
 	#--------------------- TABLEAU AVEC LES DIFFERENTES TEXTURES POSSIBLE DE CHOISIR EN CHEMIN UNIVERSEL -------------#
 
-	texture1 = "D:/ATI/L3/python/projet1/2k_ceres_fictional.jpg"
-	texture2 = "D:/ATI/L3/python/projet1/2k_earth_clouds.jpg"
-	texture3 = "D:/ATI/L3/python/projet1/2k_eris_fictional.jpg"
-	texture4 = "D:/ATI/L3/python/projet1/2k_haumea_fictional.jpg"
-	texture5 = "D:/ATI/L3/python/projet1/2k_jupiter.jpg"
-	texture6 = "D:/ATI/L3/python/projet1/2k_makemake_fictional.jpg"
-	texture7 = "D:/ATI/L3/python/projet1/2k_mars.jpg"
-	texture8 = "D:/ATI/L3/python/projet1/2k_mercury.jpg"
-	texture9 = "D:/ATI/L3/python/projet1/2k_neptune.jpg"
-	texture10 = "D:/ATI/L3/python/projet1/2k_saturn.jpg"
-	texture11 = "D:/ATI/L3/python/projet1/2k_sun.jpg"
-	texture12 = "D:/ATI/L3/python/projet1/2k_uranus.jpg"
-	texture13 = "D:/ATI/L3/python/projet1/2k_venus_atmosphere.jpg"
-	texture14 = "D:/ATI/L3/python/projet1/2k_venus_surface.jpg"
+	texture1 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_ceres_fictional.jpg"
+	texture2 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_earth_clouds.jpg"
+	texture3 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_eris_fictional.jpg"
+	texture4 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_haumea_fictional.jpg"
+	texture5 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_jupiter.jpg"
+	texture6 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_makemake_fictional.jpg"
+	texture7 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_mars.jpg"
+	texture8 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_mercury.jpg"
+	texture9 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_neptune.jpg"
+	texture10 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_saturn.jpg"
+	texture11 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_sun.jpg"
+	texture12 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_uranus.jpg"
+	texture13 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_venus_atmosphere.jpg"
+	texture14 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_venus_surface.jpg"
 	
 
 	planete = cmds.polySphere(n = "planete1", sx=VsubdX, sy=VsubdY, r=Vradius)
@@ -104,10 +103,9 @@ cmds.intSliderGrp( field=True, label='Type de blend entre la texture et la coule
 
 cmds.colorSliderGrp( label='Couleur 1', rgb=(0, 0, 0) )
 cmds.colorSliderGrp( label='Couleur 2', rgb=(1, 1, 1) )
-cmds.colorSliderGrp( label='Couleur N', rgb=(0, 0, 0) )
+
 cmds.floatSliderGrp( field=True, label='qtite couleur 1', minValue=0, maxValue=1, fieldMinValue=-100, fieldMaxValue=100, value=0.3 )
 cmds.floatSliderGrp( field=True, label='qtite couleur 2', minValue=0, maxValue=1, fieldMinValue=-100, fieldMaxValue=100, value=0.7 )
-cmds.floatSliderGrp( field=True, label='qtite couleur N', minValue=0, maxValue=1, fieldMinValue=-100, fieldMaxValue=100, value=0.5 )
 
 cmds.floatSliderGrp( field=True, label='Radius', minValue=0.001, maxValue=10, fieldMinValue=-100, fieldMaxValue=100, value=1)
 cmds.intSliderGrp( field=True, label='Nombre de subdivisions X', minValue=3, maxValue=30, fieldMinValue=-100, fieldMaxValue=100, value=20 )
