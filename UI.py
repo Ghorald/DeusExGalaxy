@@ -58,4 +58,5 @@ class UI:
         self.U.creerUnivers(self.nbSystemeSlider)
 
     def creerEtoiles(self, *args):
+        print(cmds.intSliderGrp(self.nbEtoilesSlider, q=True, value=True))
         self.U.creerEtoiles(self.nbEtoilesSlider)
