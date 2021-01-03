@@ -1,46 +1,34 @@
+# coding: utf-8
+
 import maya.cmds as cmds
 cmds.file(f = True, new = True)
 
-def planeteF():
-
-	#------------- variables -----------------#
-
-	VsubdX = 20
-	VsubdY = 20
-	Vradius = 1
-	#Vcouleur1
-	#Vcouleur2
-	VformeCouleur = 4
-	VtypeCouleur = 4
-	VtypeBlend = 3
-	Vqtite0 = 0.3
-	Vqtite1 = 0.7
-	Vqtite2 = 0.5
+def planeteF(typeCouleur, formeCouleur, typeBlend, couleur1, couleur2, qtite1, qtite2, radius, subdX, subdY):
 	#--------------------- TABLEAU AVEC LES DIFFERENTES TEXTURES POSSIBLE DE CHOISIR EN CHEMIN UNIVERSEL -------------#
 
-	texture1 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_ceres_fictional.jpg"
-	texture2 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_earth_clouds.jpg"
-	texture3 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_eris_fictional.jpg"
-	texture4 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_haumea_fictional.jpg"
-	texture5 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_jupiter.jpg"
-	texture6 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_makemake_fictional.jpg"
-	texture7 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_mars.jpg"
-	texture8 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_mercury.jpg"
-	texture9 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_neptune.jpg"
-	texture10 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_saturn.jpg"
-	texture11 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_sun.jpg"
-	texture12 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_uranus.jpg"
-	texture13 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_venus_atmosphere.jpg"
-	texture14 = "D:/ATI/L3/python/projet1/V2/PLANETE2KJPG/2k_venus_surface.jpg"
+	texture1 = "C:\\Users\\lucas\\Documents\\maya\\2020\\scripts\\DeusExGalaxy\\PLANETE2KJPG\\2k_ceres_fictional.jpg"
+	texture2 = "C:\\Users\\lucas\\Documents\\maya\\2020\\scripts\\DeusExGalaxy\\2k_earth_clouds.jpg"
+	texture3 = "C:\\Users\\lucas\\Documents\\maya\\2020\\scripts\\DeusExGalaxy\\PLANETE2KJPG\\2k_eris_fictional.jpg"
+	texture4 = "C:\\Users\\lucas\\Documents\\maya\\2020\\scripts\\DeusExGalaxy\\PLANETE2KJPG\\2k_haumea_fictional.jpg"
+	texture5 = "C:\\Users\\lucas\\Documents\\maya\\2020\\scripts\\DeusExGalaxy\\PLANETE2KJPG\\2k_jupiter.jpg"
+	texture6 = "C:\\Users\\lucas\\Documents\\maya\\2020\\scripts\\DeusExGalaxy\\PLANETE2KJPG\\2k_makemake_fictional.jpg"
+	texture7 = "C:\\Users\\lucas\\Documents\\maya\\2020\\scripts\\DeusExGalaxy\\PLANETE2KJPG\\2k_mars.jpg"
+	texture8 = "C:\\Users\\lucas\\Documents\\maya\\2020\\scripts\\DeusExGalaxy\\PLANETE2KJPG\\2k_mercury.jpg"
+	texture9 = "C:\\Users\\lucas\\Documents\\maya\\2020\\scripts\\DeusExGalaxy\\PLANETE2KJPG\\2k_neptune.jpg"
+	texture10 = "C:\\Users\\lucas\\Documents\\maya\\2020\\scripts\\DeusExGalaxy\\PLANETE2KJPG\\2k_saturn.jpg"
+	texture11 = "C:\\Users\\lucas\\Documents\\maya\\2020\\scripts\\DeusExGalaxy\\PLANETE2KJPG\\2k_sun.jpg"
+	texture12 = "C:\\Users\\lucas\\Documents\\maya\\2020\\scripts\\DeusExGalaxy\\PLANETE2KJPG\\2k_uranus.jpg"
+	texture13 = "C:\\Users\\lucas\\Documents\\maya\\2020\\scripts\\DeusExGalaxy\\PLANETE2KJPG\\2k_venus_atmosphere.jpg"
+	texture14 = "C:\\Users\\lucas\\Documents\\maya\\2020\\scripts\\DeusExGalaxy\\PLANETE2KJPG\\2k_venus_surface.jpg"
 	
 
-	planete = cmds.polySphere(n = "planete1", sx=VsubdX, sy=VsubdY, r=Vradius)
+	planete = cmds.polySphere(n = "planete1", sx=subdX, sy=subdY, r=radius)
 	
 	
-	# ------  TOUJOURS A PLACER EN PREMIER  ------ #
+	# Toujours à placer en premier
 	cmds.HypershadeWindow()
 
-	# ------  SHADER SIMPLE AVEC UNE TEXTURE ------ #
+	# Shader simple avec une texture
 
 	myPShader1 = cmds.shadingNode('lambert', asShader=True, n="myPLambertShaderN")
 	cmds.sets(renderable=True, noSurfaceShader=True,n="myPLambertShaderNSG")
@@ -60,74 +48,36 @@ def planeteF():
 	cmds.connectAttr(myP2DTexture2+".outUV", myPRampColor+".uvCoord")
 	cmds.connectAttr(myPShader1+".outColor", "myPLambertShaderNSG.surfaceShader")
 
-	#--------------- parametres de la planete 
+	# Paramètres de la planète 
 
-	cmds.setAttr(myPRampColor+".type", VformeCouleur) # type radial
-	cmds.setAttr(myPRampColor+".interpolation", VtypeCouleur) # interpolation des couleurs en smooth
-	cmds.setAttr("myPRampColorN.colorEntryList[0].color", 0.2218, 0.0695, 0.0711,  type="double3") # couleur0
-	cmds.setAttr("myPRampColorN.colorEntryList[0].position", Vqtite0)
-	cmds.setAttr("myPRampColorN.colorEntryList[1].color", 0.0356, 0.0475, 0.1069,  type="double3") # couleur1
-	cmds.setAttr("myPRampColorN.colorEntryList[1].position", Vqtite1)
+	cmds.setAttr(myPRampColor+".type", formeCouleur) # type radial
+	cmds.setAttr(myPRampColor+".interpolation", typeCouleur) # interpolation des couleurs en smooth
+	cmds.setAttr("myPRampColorN.colorEntryList[0].color", couleur1[0], couleur1[1], couleur1[2],  type="double3") # couleur 1
+	cmds.setAttr("myPRampColorN.colorEntryList[0].position", qtite1)
+	cmds.setAttr("myPRampColorN.colorEntryList[1].color", couleur2[0], couleur2[1], couleur2[2], type="double3") # couleur 2
+	cmds.setAttr("myPRampColorN.colorEntryList[1].position", qtite2)
 	
-	#couleures suplementaires
-	cmds.setAttr("myPRampColorN.colorEntryList[2].color", 0.4013, 0.5065, 0.4564, type="double3") # couleur2
-	cmds.setAttr("myPRampColorN.colorEntryList[2].position", Vqtite2)
-	#type de blend
-	cmds.setAttr("myPMixColorN.operation", VtypeBlend) # divide
+	# Type de blend
+	cmds.setAttr("myPMixColorN.operation", typeBlend) # divide
 
-	#------------------- LIGHT ---------------------------# 
+	# LIGHT
 	light = cmds.directionalLight(rotation=(-45, 30, 15))
 	cmds.directionalLight( light, e=True, intensity=0.8 )
 
-
-	# -------------------- APPLICATION SHADER -------------------#
-
+	# APPLICATION SHADER
 	cmds.select("planete1" ,replace=True)
 	cmds.hyperShade(a = myPShader1)
 	cmds.select(cl=True)
 
-	# -------------------- REGLAGE DE LA SCENE -------------------#
-
+	# Réglages de la scène
 	cmds.displaySmoothness( du=2, dv=2, pw=16, ps=4 , po=3 )
 
 
-window = cmds.window(title = "planete", widthHeight=(200, 55))
-cmds.columnLayout( adjustableColumn=True )
 
-cmds.button( label='Close', c=('cmds.deleteUI(\"' + window + '\", window=True)') )
-
-cmds.intSliderGrp( field=True, label='Texture parmi tableau', minValue=1, maxValue=14, fieldMinValue=-100, fieldMaxValue=100, value=11 )
-cmds.intSliderGrp( field=True, label='Type d interpolation de couleur', minValue=0, maxValue=7, fieldMinValue=-100, fieldMaxValue=100, value=4 )
-cmds.intSliderGrp( field=True, label='Forme de la couleur', minValue=0, maxValue=9, fieldMinValue=-100, fieldMaxValue=100, value=4 )
-cmds.intSliderGrp( field=True, label='Type de blend entre la texture et la couleur', minValue=0, maxValue=6, fieldMinValue=-100, fieldMaxValue=100, value=3 )
-
-cmds.colorSliderGrp( label='Couleur 1', rgb=(0, 0, 0) )
-cmds.colorSliderGrp( label='Couleur 2', rgb=(1, 1, 1) )
-
-cmds.floatSliderGrp( field=True, label='qtite couleur 1', minValue=0, maxValue=1, fieldMinValue=-100, fieldMaxValue=100, value=0.3 )
-cmds.floatSliderGrp( field=True, label='qtite couleur 2', minValue=0, maxValue=1, fieldMinValue=-100, fieldMaxValue=100, value=0.7 )
-
-cmds.floatSliderGrp( field=True, label='Radius', minValue=0.001, maxValue=10, fieldMinValue=-100, fieldMaxValue=100, value=1)
-cmds.intSliderGrp( field=True, label='Nombre de subdivisions X', minValue=3, maxValue=30, fieldMinValue=-100, fieldMaxValue=100, value=20 )
-cmds.intSliderGrp( field=True, label='Nombre de subdivisions Y', minValue=3, maxValue=30, fieldMinValue=-100, fieldMaxValue=100, value=20 )
-
-
-
-cmds.button( label='GenererUnePlanete', c= "planeteF()" )
-
-cmds.showWindow(window)
-
-
-
-
-
-
-
-
-# ------------------------------ A FAIRE -----------------------#
+# À faire
 
 # relier les sliders aux variables
-# créer des variables pour les couleurs grâce à la fonction colorSliderGrp
+# creer des variables pour les couleurs grâce à la fonction colorSliderGrp
 # mettre les textures en chemin universel
-# automatiser le programme pour plusieurs planetes cad avoir un shader assigné à chaque nouvelle planete
+# automatiser le programme pour plusieurs planetes cad avoir un shader assigne à chaque nouvelle planete
 # retirer la lumiere de ce script quand il sera relier au script du soleil qui posseded déjà une lumière
