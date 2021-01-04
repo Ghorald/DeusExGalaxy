@@ -1,6 +1,7 @@
 # coding: utf-8
 
 import maya.cmds as cmds
+import random as rd
 from DeusExGalaxy import Univers
 from DeusExGalaxy import planetes_proc1
 from DeusExGalaxy import sun_proc_6bis
@@ -28,10 +29,13 @@ class UI:
         """
         window = cmds.window(title="Generateur d'univers")
         cmds.tabLayout("Univers et soleils")
-        cmds.columnLayout("Tanina", adjustableColumn=True)
-        self.nbSystemeSlider = cmds.intSliderGrp(field=True, label='Nombre de systemes planetaires', minValue=1, maxValue=10, value=5)
+        self.tabTanina = cmds.columnLayout("Tanina", adjustableColumn=True)
         self.nbEtoilesSlider = cmds.intSliderGrp(field=True, label='Nombre d\'etoiles', minValue=100, maxValue=1000, value=500)
-        cmds.button(label="OK", c=self.rechargerFenetre)
+        cmds.button('createStars', label="Generer les etoiles", c=self.creerEtoiles)
+        self.nbSysteme = rd.randint(1, 10)
+        for i in range(self.nbSysteme):
+            self.U.addPlaneteSlider(cmds.intSliderGrp(field=True, label='Nombre de planetes', minValue=1, maxValue=10, value=5))
+        cmds.button('createUni', label="Generer un univers", c=self.creerUnivers)
 
         cmds.setParent('..')
         cmds.setParent('..')
@@ -49,7 +53,7 @@ class UI:
         cmds.showWindow()
     
     def UIPlanete(self):
-        cmds.intSliderGrp(field=True, label='Texture parmi tableau', minValue=1, maxValue=14, fieldMinValue=-100, fieldMaxValue=100, value=11)
+        self.texturePlanete = cmds.intSliderGrp(field=True, label='Texture parmi tableau', minValue=0, maxValue=13, fieldMinValue=-100, fieldMaxValue=100, value=11)
         self.typeCouleurPlanete = cmds.intSliderGrp(field=True, label="Type d'interpolation de couleur", minValue=0, maxValue=7, fieldMinValue=-100, fieldMaxValue=100, value=4)
         self.formeCouleurPlanete = cmds.intSliderGrp(field=True, label='Forme de la couleur', minValue=0, maxValue=9, fieldMinValue=-100, fieldMaxValue=100, value=4)
         self.typeBlendPlanete = cmds.intSliderGrp(field=True, label='Type de blend entre la texture et la couleur', minValue=0, maxValue=6, fieldMinValue=-100, fieldMaxValue=100, value=3)
@@ -78,35 +82,14 @@ class UI:
 
         cmds.button( label='Generer son Soleil', c=self.creerSoleil)
 
-    # Recharger la fenetre avec le bon nombre de sliders
-    def rechargerFenetre(self, *args):
-        """
-        Rechargement de la fenêtre avec le bon nombre de sliders
-        """
-        planSlider = self.U.getPlaneteSlider()
-        if planSlider != []:
-            for i in planSlider:
-                cmds.deleteUI(i, control=True)
-            self.U.resPlaneteSlider()
-            cmds.deleteUI('createUni', control=True)
-            cmds.deleteUI('createStars', control=True)
-
-        nbSys = cmds.intSliderGrp(self.nbSystemeSlider, q=True, value=True)
-
-        for i in range(nbSys):
-            self.U.addPlaneteSlider(cmds.intSliderGrp(field=True, label='Nombre de planetes', minValue=1, maxValue=10, value=5))
-
-        cmds.button('createUni', label="Generer un univers", c=self.creerUnivers)
-        cmds.button('createStars', label="Generer les etoiles", c=self.creerEtoiles)
-
-
     def creerUnivers(self, *args):
-        self.U.creerUnivers(self.nbSystemeSlider)
+        self.U.creerUnivers(self.nbSysteme)
 
     def creerEtoiles(self, *args):
         self.U.creerEtoiles(self.nbEtoilesSlider)
 
     def creerPlanete(self, *args):
+        texture = cmds.intSliderGrp(self.texturePlanete, q=True, value=True)
         typeCouleur = cmds.intSliderGrp(self.typeCouleurPlanete, q=True, value=True)
         formCouleur = cmds.intSliderGrp(self.formeCouleurPlanete, q=True, value=True)
         typeBlend = cmds.intSliderGrp(self.typeBlendPlanete, q=True, value=True)
@@ -117,7 +100,7 @@ class UI:
         subdY = cmds.intSliderGrp(self.subdYPlanete, q=True, value=True)
         couleur1 = cmds.colorSliderGrp(self.couleur1Planete, q=True, rgb=True)
         couleur2 = cmds.colorSliderGrp(self.couleur2Planete, q=True, rgb=True)
-        planetes_proc1.planeteF(typeCouleur, formCouleur, typeBlend, couleur1, couleur2, qtite1, qtite2, radius, subdX, subdY)
+        planetes_proc1.planeteF(texture, typeCouleur, formCouleur, typeBlend, couleur1, couleur2, qtite1, qtite2, radius, subdX, subdY, [0, 0, 0, 0])
     
     def creerSoleil(self, *args):
         intensiteEmission = cmds.intSliderGrp(self.intensiteEmissionSun, q=True, value=True)
@@ -127,4 +110,4 @@ class UI:
         formeTexture = cmds.floatSliderGrp(self.formeTextureSun, q=True, value=True)
         qtiteTexture = cmds.floatSliderGrp(self.qtiteTextureSun, q=True, value=True)
 
-        sun_proc_6bis.sunF(intensiteEmission, propCouleurs, intensiteBump, typeTexture, formeTexture, qtiteTexture)
+        sun_proc_6bis.sunF(intensiteEmission, propCouleurs, intensiteBump, typeTexture, formeTexture, qtiteTexture, [0, 0, 0, 0])
